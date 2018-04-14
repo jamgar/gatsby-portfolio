@@ -1,0 +1,28 @@
+backend:
+  name: test-repo
+
+media_folder: static/assets
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: blog
+    label: Blog
+    folder: blogs
+    create: true
+    fields:
+      - { name: type, label: Type, default: "blog" }
+      - { name: date, label: Date, widget: date }
+      - { name: title, label: Title }
+      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
+      - { name: body, label: body, widget: markdown }
+  - name: project
+    label: Project
+    folder: projects
+    create: true
+    fields:
+      - { name: type, label: Type, default: "project" }
+      - { name: date, label: Date, widget: date }
+      - { name: title, label: Title }
+      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
+      - { name: body, label: body, widget: markdown }
