@@ -23,6 +23,8 @@ export const postQuery = graphql`
         slug
       }
       frontmatter {
+        path
+        type
         title
         date
       }
