@@ -22,7 +22,7 @@ exports.createPages = ({boundActionCreators, graphql}) => {
   return graphql (
     `
     {
-      allMarkdownRemark(filter: { id: { regex: "//blogs|projects//"}}) {
+      allMarkdownRemark {
         edges {
           node {
             id
@@ -44,7 +44,7 @@ exports.createPages = ({boundActionCreators, graphql}) => {
 
     res.data.allMarkdownRemark.edges.forEach(({node}) => {
       const isBlog = node.frontmatter.type === 'blog'
-      
+
       createPage({
         path: node.fields.slug,
         component: isBlog ? postTemplate : projectTemplate,
