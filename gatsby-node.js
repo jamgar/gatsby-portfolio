@@ -3,16 +3,15 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   const { createNodeField } = boundActionCreators
-  // console.log(createNodeField);
+
   if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({ node, getNode })
+    const value = createFilePath({ node, getNode })
     createNodeField({
-      node,
       name: `slug`,
-      value: slug,
+      node,
+      value,
     })
   }
-}
 
 exports.createPages = ({boundActionCreators, graphql}) => {
   const { createPage } = boundActionCreators
