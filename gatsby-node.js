@@ -19,8 +19,7 @@ exports.createPages = ({boundActionCreators, graphql}) => {
   const postTemplate = path.resolve('src/templates/blog-post.js')
   const projectTemplate = path.resolve('src/templates/project-post.js')
 
-  return graphql (
-    `
+  return graphql (`
     {
       allMarkdownRemark {
         edges {
@@ -36,22 +35,21 @@ exports.createPages = ({boundActionCreators, graphql}) => {
         }
       }
     }
-    `
-  ).then (res => {
-    if (res.errors) {
-      return Promise.reject(res.errors)
-    }
+    `).then (res => {
+      if (res.errors) {
+        return Promise.reject(res.errors)
+      }
 
-    res.data.allMarkdownRemark.edges.forEach(({node}) => {
-      const isBlog = node.frontmatter.type === 'blog'
+      res.data.allMarkdownRemark.edges.forEach(({node}) => {
+        const isBlog = node.frontmatter.type === 'blog'
 
-      createPage({
-        path: node.fields.slug,
-        component: isBlog ? postTemplate : projectTemplate,
-        context: {
-          slug: node.fields.slug
-        }
+        createPage({
+          path: node.fields.slug,
+          component: isBlog ? postTemplate : projectTemplate,
+          context: {
+            slug: node.fields.slug
+          }
+        })
       })
-    })
   })
 }
